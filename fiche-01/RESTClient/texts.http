@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8080/texts
+
+### View all texts : GET texts
+GET {{baseUrl}}
+
+### View all texts with level medium : GET films?level=value
+GET {{baseUrl}}?level=medium
+
+### View text with ID == 1 : GET texts/{id}
+GET {{baseUrl}}/1
+
+### Add a text : POST texts
+POST {{baseUrl}}
+Content-Type: application/json
+
+{    
+    "level": "medium",
+    "content": "bonjour je suis un texte à dactylographier"
+}
+
+### Delete text with ID == 1 : DELETE texts/{id}
+DELETE {{baseUrl}}/1
+
+### Update text with ID == 2 : PUT texts/{id}
+PUT {{baseUrl}}/2 
+Content-Type: application/json
+
+{
+    "level": "hard",
+    "content": "bonjour je suis un texte à dactylographier qui a été modifié"
+}
