@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:6060/pages
+@baseAuthsUrl = http://localhost:6060/auths
+
+### Login with default user credentials : POST auths/login
+### Get the token from the response in token variable
+# @name loggedUser
+POST {{baseAuthsUrl}}/login
+Content-Type: application/json
+
+{
+    "login":"james",
+    "password":"password"
+}
+
+@token = {{loggedUser.response.body.token}}
+
+### View all pages : GET pages
+GET {{baseUrl}}
+Authorization: {{token}}
+
+### View page with ID == 1 : GET pages/{id}
+GET {{baseUrl}}/10
+Authorization: {{token}}
+
+### Add a page : POST pages
+POST {{baseUrl}}
+Authorization: {{token}}
+Content-Type: application/json
+
+{    
+    "titre": "mon titre",
+    "uri": "mon uri.gouv",
+    "contenu": "ERROR 404",
+    "status": "published"
+}
+
+### Delete page with ID == 1 : DELETE pages/{id}
+DELETE {{baseUrl}}/10
+Authorization: {{token}}
+
+### Update page with ID == 1 : PUT pages/{id}
+PUT {{baseUrl}}/10
+Authorization: {{token}}
+Content-Type: application/json
+
+{    
+    "titre": "mon titre modifié",
+    "uri": "mon uri.gouv.com.net",
+    "contenu": "ERROR 500",
+    "status": "hidden"
+}
